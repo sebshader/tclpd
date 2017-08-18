@@ -1,0 +1,85 @@
+#N canvas 481 176 742 518 10;
+#X obj 63 244 bitmap -uwidth 8 -uheight 8 -cellsize 15 -label empty
+-labelpos top -sendsymbol \$0-out -receivesymbol \$0b -fgcolor #000000
+-bgcolor #ffffff -lblcolor #000000;
+#bitmap setdata 0 1 1 0 0 0 0 1 1 1 0 1 1 0 1 0 1 0 1 1 0 1 0 1 0 0
+0 1 1 0 1 0 1 0 1 0 0 1 0 1 0 0 0 0 1 1 1 0 0 1 0 1 0 1 0 1 0 0 1 0
+1 0 1 0;
+#X msg 39 117 getrow \$1;
+#X obj 42 245 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -228856 -162280
+-1 7;
+#X obj 42 410 s \$0r;
+#X obj 39 89 r \$0r;
+#X text 36 19 [bitmap] - a two dimensional array of bits (toggles)
+;
+#X text 38 49 creation arguments -cellsize <#> -uwidth <#> -uheight
+<#>;
+#X msg 111 117 getcol \$1;
+#X obj 111 89 r \$0c;
+#X obj 39 157 s \$0b;
+#X obj 63 372 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -228856 -162280
+-1 5;
+#X obj 112 415 s \$0c;
+#X obj 227 157 s \$0b;
+#X msg 227 117 getcell 0 1;
+#X msg 317 117 getcell 1 1;
+#X text 226 88 getcell <row> <col>;
+#X obj 247 243 bitmap -uwidth 16 -uheight 16 -cellsize 4 -label empty
+-labelpos top -sendsymbol empty -receivesymbol empty -fgcolor #000000
+-bgcolor #ffffff -lblcolor #000000;
+#bitmap setdata 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 1 1 1 1 0
+1 1 1 1 1 0 0 1 0 1 0 1 0 0 1 0 1 0 0 0 1 0 0 1 1 1 0 1 0 0 1 0 1 0
+0 0 1 0 0 0 0 0 0 1 1 1 1 0 1 0 0 0 1 0 0 1 1 1 1 0 0 0 0 0 1 1 1 1
+1 0 0 1 0 0 1 0 1 1 1 1 0 0 0 0 0 0 0 1 0 0 1 0 1 0 0 1 0 1 1 1 1 0
+0 1 1 1 1 0 1 0 0 1 0 1 0 0 1 0 0 0 0 0 0 0 1 1 1 1 0 1 0 0 1 0 0 1
+1 1 1 1 0 0 0 0 0 1 1 1 1 0 0 1 0 0 0 1 0 1 1 1 1 0 0 0 0 0 0 1 0 0
+0 1 0 1 0 0 1 0 1 1 1 0 0 1 0 0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 1 1 1 1
+0 1 1 1 1 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X msg 447 200 setcell \$1 \$2 \$3;
+#N canvas 4 117 450 300 randomdata 0;
+#X obj 220 136 random 2;
+#X obj 62 89 t b b b;
+#X obj 62 35 inlet;
+#X obj 62 187 pack f f f;
+#X obj 62 222 outlet;
+#X obj 62 62 metro 10;
+#X obj 62 136 random 4;
+#X obj 141 136 random 4;
+#X connect 0 0 3 2;
+#X connect 1 0 6 0;
+#X connect 1 1 7 0;
+#X connect 1 2 0 0;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 5 0 1 0;
+#X connect 6 0 3 0;
+#X connect 7 0 3 1;
+#X restore 447 175 pd randomdata;
+#X obj 447 151 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 447 331 bitmap -uwidth 4 -uheight 4 -cellsize 16 -label empty
+-labelpos top -sendsymbol empty -receivesymbol empty -fgcolor #000000
+-bgcolor #ffffff -lblcolor #000000;
+#bitmap setdata 0 0 0 1 1 0 0 1 1 1 1 1 0 0 0 1;
+#X msg 465 231 setcol 1 0 0 0 0 \, setcol 2 0 0 0 0;
+#X msg 481 292 setrow \$1 \$2 \$2 \$3 \$3;
+#X msg 481 265 0 1 0 \, 1 1 0 \, 2 0 1 \, 3 0 1;
+#X obj 238 371 r \$0-out;
+#X obj 238 401 print out;
+#X obj 445 415 print out2;
+#X connect 1 0 9 0;
+#X connect 2 0 3 0;
+#X connect 4 0 1 0;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;
+#X connect 10 0 11 0;
+#X connect 13 0 12 0;
+#X connect 14 0 12 0;
+#X connect 17 0 20 0;
+#X connect 18 0 17 0;
+#X connect 19 0 18 0;
+#X connect 20 0 26 0;
+#X connect 21 0 20 0;
+#X connect 22 0 20 0;
+#X connect 23 0 22 0;
+#X connect 24 0 25 0;
