@@ -1,7 +1,7 @@
 #include "m_pd.h"
 //#include "m_imp.h"
 #include "g_canvas.h"
-//#include "s_stuff.h"
+#include "s_stuff.h"
 
 #include <tcl.h>
 
@@ -113,9 +113,8 @@ void tclpd_guiclass_motion(t_tcl *x, t_floatarg dx, t_floatarg dy);
 void tclpd_guiclass_grab(t_tcl *x, t_glist *glist, int xpix, int ypix);
 
 /* tcl_loader.c */
-extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname);
+extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname, const char *path);
 /* pd loader private stuff: */
-typedef int (*loader_t)(t_canvas *canvas, char *classname);
 extern void sys_register_loader(loader_t loader);
 extern int sys_onloadlist(char *classname);
 extern void sys_putonloadlist(char *classname);

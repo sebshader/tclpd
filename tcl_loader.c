@@ -8,12 +8,14 @@ extern int sys_verbose;  /* included in pd, also defined in s_stuff.h */
 //void source_table_remove(const char *object_name);
 void source_table_add(const char *object_name, const char *source_path);
 
-extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname) {
+extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname, const char *path) {
     char filename[MAXPDSTRING], dirbuf[MAXPDSTRING], buf[MAXPDSTRING],
         *classname, *nameptr;
     int fd;
-
-    if ((classname = strrchr(objectname, '/')) != NULL)
+    
+	if(!path)return (0);
+	
+    if ((classname = strrchr(objectname, '/')))
         classname++;
     else
         classname = objectname;
@@ -26,7 +28,7 @@ extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname) {
     /* try looking in the path for (objectname).(tcl) ... */
     if(sys_verbose)
         verbose(-1, "tclpd loader: searching for %s in path...", objectname);
-    if ((fd = canvas_open(canvas, objectname, ".tcl",
+    if ((fd = sys_trytoopenone(path, objectname, ".tcl",
         dirbuf, &nameptr, MAXPDSTRING, 1)) >= 0)
             goto found;
 
@@ -38,7 +40,7 @@ extern int tclpd_do_load_lib(t_canvas *canvas, char *objectname) {
     filename[MAXPDSTRING - 1] = 0;
     if(sys_verbose)
         verbose(-1, "tclpd loader: searching for %s in path...", filename);
-    if ((fd = canvas_open(canvas, filename, ".tcl",
+    if ((fd = fd = sys_trytoopenone(path, objectname, ".tcl",
         dirbuf, &nameptr, MAXPDSTRING, 1)) >= 0)
             goto found;
 

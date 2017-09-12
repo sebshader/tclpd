@@ -1,0 +1,8 @@
+*.o
+
+# externals
+*.pd_linux
+*.pd_darwin
+*.d_fat
+*.d_fat_o
+*.dll
